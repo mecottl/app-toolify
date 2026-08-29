@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Toolify</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e2231a'/%3E%3Ctext x='16' y='23' font-family='Segoe UI,Arial,sans-serif' font-size='20' font-weight='700' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">🧰</div>
+      <div>
+        <h1>Toolify</h1>
+        <p>tu caja de herramientas</p>
+      </div>
+    </div>
+    <input id="search" type="search" placeholder="Buscar herramienta…" autocomplete="off" />
+    <nav id="nav" class="nav"></nav>
+    <footer>
+      <button id="clean" class="ghost">🧹 Limpiar archivos temporales</button>
+      <span>corre 100% en tu equipo</span>
+    </footer>
+  </aside>
+
+  <main id="main">
+    <div class="welcome" id="welcome">
+      <div class="welcome-logo">🧰</div>
+      <h2>Toolify</h2>
+      <p>Tu caja de herramientas personal. Elige una herramienta en la izquierda.</p>
+    </div>
+  </main>
+</div>
+<script src="tools.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
