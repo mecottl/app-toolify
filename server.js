@@ -37,6 +37,22 @@ const TOOLS = {
 };
 
 const app = express();
+app.disable("x-powered-by");
+
+// Optional HTTP Basic auth: set AUTH_USER + AUTH_PASS to lock the whole app.
+// Leave them unset for local use (no auth). Recommended for any public deploy.
+const { AUTH_USER, AUTH_PASS } = process.env;
+if (AUTH_USER && AUTH_PASS) {
+  app.use((req, res, next) => {
+    const [scheme, encoded] = (req.headers.authorization || "").split(" ");
+    const [user, pass] = Buffer.from(encoded || "", "base64").toString().split(":");
+    if (scheme === "Basic" && user === AUTH_USER && pass === AUTH_PASS) return next();
+    res.set("WWW-Authenticate", 'Basic realm="Toolify", charset="UTF-8"');
+    res.status(401).send("Autenticación requerida.");
+  });
+  console.log("  🔒 Basic auth activada");
+}
+
 app.use(express.json({ limit: "4mb" }));
 app.use(express.static(path.join(__dirname, "public")));
 

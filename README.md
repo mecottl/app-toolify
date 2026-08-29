@@ -60,6 +60,35 @@ public/
 2. Regístrala en el objeto `TOOLS` de `server.js`.
 3. **Frontend**: agrega un objeto al arreglo de `public/tools.js`. La UI se genera sola.
 
+## Desplegar (hosting)
+
+**No sirve Vercel/Netlify** (serverless): Toolify necesita procesos largos, binarios del
+sistema (ffmpeg, yt-dlp) y escribir en disco. Usa un host de contenedores.
+
+El repo ya trae `Dockerfile` (Node + ffmpeg + yt-dlp) y `render.yaml`.
+
+### Render (recomendado, tiene plan gratis)
+1. <https://dashboard.render.com> → **New + → Blueprint** → elige este repo.
+2. Render lee `render.yaml` y crea el servicio con Docker.
+3. En **Environment**, define `AUTH_USER` y `AUTH_PASS` (protege la app con usuario/contraseña).
+4. Deploy. Te da una URL `https://toolify-xxxx.onrender.com`.
+
+Plan free: 512 MB RAM y se duerme tras 15 min de inactividad (primer acceso tarda ~30 s).
+Las conversiones de video grandes pueden ir lentas o quedarse sin memoria; para eso, sube de plan.
+
+### Railway / Fly.io / Cloud Run
+Mismo `Dockerfile`. En Railway: *New Project → Deploy from GitHub repo*. En Fly: `fly launch`.
+
+### Local con Docker
+```bash
+docker build -t toolify .
+docker run -p 4747:4747 -e AUTH_USER=yo -e AUTH_PASS=1234 toolify
+```
+
+### Autenticación
+Si defines `AUTH_USER` **y** `AUTH_PASS`, toda la app queda tras HTTP Basic auth.
+Sin esas variables no hay auth (modo local).
+
 ## Aviso
 
 Uso personal. Esta app **no trae autenticación ni límites de uso**: si la expones a internet,
