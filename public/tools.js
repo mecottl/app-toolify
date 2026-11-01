@@ -86,10 +86,10 @@ window.TOOLS = [
   /* === Multimedia === */
   {
     id: "conv-media", cat: "Multimedia", ico: "🔄", name: "Cambiar el formato de un archivo",
-    desc: "Reempaqueta o recodifica un archivo local a otro contenedor. Un video puede ir a video o a solo audio; un archivo de solo audio (mp3, wav…) solo puede convertirse a otro formato de audio.",
+    desc: "Reempaqueta o recodifica un archivo local a otro contenedor. Un video puede ir a video o a solo audio; un archivo de solo audio (mp3, wav…) solo puede convertirse a otro formato de audio. Acepta varios a la vez.",
     kind: "job",
     fields: [
-      { name: "file", label: "Archivo de audio o video", type: "file", accept: "video/*,audio/*" },
+      { name: "file", label: "Archivos de audio o video", type: "file", accept: "video/*,audio/*", multiple: true },
       { name: "format", label: "Convertir a", type: "select", def: "mp4",
         optgroups: [
           { label: "Contenedor de video (necesita un video de entrada)", options: ["mp4", "mkv", "webm", "mov"] },
